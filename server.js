@@ -153,5 +153,7 @@ Promise.all([kenny.save(), mark.save(), benny.save()])
     .then(updateUsername)
     .then(findMarkAndDelete)
     .then(findKennyAndDelete)
-    // .then(findBennyAndRemove)
+    .then(findBennyAndRemove)
     .catch(console.log.bind(console))
+
+process.exit();
