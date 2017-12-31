@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://<admin>:<adminpass>@ds135917.mlab.com:35917/db1', {
+//mongoose.connect('mongodb://localhost/nodeappdatabase', {
+mongoose.connect('mongodb://user1:password1@ds135917.mlab.com:35917/db1', {
     useMongoClient: true
 });
 
@@ -24,6 +25,7 @@ userSchema.methods.manify = function(next) {
 };
 
 //pre-save method
+
 userSchema.pre('save', function(next) {
     //pobranie aktualnego czasu
     const currentDate = new Date();
@@ -120,7 +122,7 @@ const findMarkAndDelete = function() {
     return User.findOne({ username: 'Mark_the_boy' })
         .then(function(user) {
             return user.remove(function() {
-                console.log('User successfully deleted');
+                console.log('User1 successfully deleted');
             });
         })
 }
@@ -130,7 +132,7 @@ const findKennyAndDelete = function() {
     return User.findOne({ username: 'Kenny_the_boy' })
         .then(function(user) {
             return user.remove(function() {
-                console.log('User successfully deleted');
+                console.log('User2 successfully deleted');
             });
         });
 }
@@ -140,11 +142,10 @@ const findBennyAndRemove = function() {
     return User.findOneAndRemove({ username: 'Benny_the_man' })
         .then(function(user) {
             return user.remove(function() {
-                console.log('User successfully deleted');
+                console.log('User3 successfully deleted');
             });
         });
 }
-
 Promise.all([kenny.save(), mark.save(), benny.save()])
     .then(findAllUsers)
     .then(findSpecificRecord)
